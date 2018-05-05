@@ -27,9 +27,9 @@ class ThingOperationTest < MiniTest::Spec
   end
 
   describe "Update" do
-    let (:thing) { Thing::Create.(thing: {name: "Rails", description: "Kickass web dev"}).model }
+    let(:thing) { Thing::Create.(thing: {name: "Rails", description: "Kickass web dev"}).model }
 
-    it "persists valid, ignores name" do
+    it "persists valid data, ignores name" do
       Thing::Update.(
         id:     thing.id,
         thing: {name: "Lotus", description: "MVC, well.."}).model

@@ -1,6 +1,6 @@
 class Thing < ActiveRecord::Base
   class Create < Trailblazer::Operation
-    include Model
+    include Model    # Tjis will resolve to & load the Trailblazer::Operation::Model module
     model Thing, :create
 
     contract do
@@ -8,20 +8,21 @@ class Thing < ActiveRecord::Base
       property :description
 
       validates :name, presence: true
-      validates :description, length: {in: 4..160}, allow_blank: true
+      validates :description, length: { in: 4..160 }, allow_blank: true
     end
 
     def process(params)
-      validate(params[:thing]) do |f|
+      thing = Thing.new
+
+      validates(params[:thing]) do |f|
         f.save
       end
     end
-  end
 
-  class Update < Create
-    action :update
 
-    contract do
+    class Update < Create
+      action :update
+  
       property :name, writeable: false
     end
   end

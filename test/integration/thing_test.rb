@@ -1,4 +1,5 @@
 class ThingIntegrationTest < Trailblazer::Test::Integration
+  # Trailbazer::Test::Integration allows us to use Capybara andit's selector matches like must_have_css
   it "allows anonymous" do
     visit "/things/new"
 
